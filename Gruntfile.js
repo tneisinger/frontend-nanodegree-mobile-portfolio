@@ -54,22 +54,12 @@ module.exports = function(grunt) {
         },
         files: [
           {
-            expand: true,     // Enable dynamic expansion
+            expand: true,
             cwd: 'src/',
             src: ['*.html'],
             dest: 'dist'
           }
         ]
-      }
-    },
-    image_resize: {
-      resize: {
-        options: {
-          width: 100
-        },
-        files: {
-          'src/views/images/pizzeria.jpg': 'dist/views/images/pizzeria.jpg'
-        }
       }
     },
     imagemin: {
@@ -90,9 +80,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
-  grunt.loadNpmTasks('grunt-image-resize');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
 
-  //grunt.registerTask('default', ['jshint', 'htmlmin', 'uglify', 'cssmin', 'compress']);
-  grunt.registerTask('default', ['jshint', 'htmlmin', 'uglify', 'cssmin', 'image_resize', 'imagemin']);
+  grunt.registerTask('default', ['jshint', 'htmlmin', 'uglify', 'cssmin', 'imagemin']);
 };
