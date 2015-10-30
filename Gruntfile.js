@@ -61,6 +61,16 @@ module.exports = function(grunt) {
           }
         ]
       }
+    },
+    imagemin: {
+      dynamic: {
+        files: [{
+          expand: true,
+          cwd: 'src/',
+          src: ['**/*.{png,jpg,gif}'],
+          dest: 'dist/'
+        }]
+      }
     }
   });
 
@@ -70,7 +80,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
 
   //grunt.registerTask('default', ['jshint', 'htmlmin', 'uglify', 'cssmin', 'compress']);
-  grunt.registerTask('default', ['jshint', 'htmlmin', 'uglify', 'cssmin']);
+  grunt.registerTask('default', ['jshint', 'htmlmin', 'uglify', 'cssmin', 'imagemin']);
 };
