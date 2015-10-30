@@ -26,16 +26,16 @@ module.exports = function(grunt) {
       files: ['<%= jshint.files %>'],
       tasks: ['jshint']
     },
-    //compress: {
-      //main: {
-        //options: {
-          //mode: 'gzip'
-        //},
-        //files: [
-          //{expand: true, src: ['dist/js/*.js', 'dist/*.html', 'dist/css/*.css']}
-        //]
-      //}
-    //},
+    compress: {
+      main: {
+        options: {
+          mode: 'gzip'
+        },
+        files: [
+          {expand: true, src: ['dist/js/*.js', 'dist/*.html', 'dist/css/*.css']}
+        ]
+      }
+    },
     cssmin: {
       target: {
         files: [{
@@ -71,5 +71,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
-  grunt.registerTask('default', ['jshint', 'htmlmin', 'uglify', 'cssmin']);//, 'compress']);
+  //grunt.registerTask('default', ['jshint', 'htmlmin', 'uglify', 'cssmin', 'compress']);
+  grunt.registerTask('default', ['jshint', 'htmlmin', 'uglify', 'cssmin']);
 };
