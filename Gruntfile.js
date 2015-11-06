@@ -8,12 +8,13 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     uglify: {
-      js: {
-        src: ['src/js/perfmatters.js'],
-        dest: 'dist/js/perfmatters.js'
+      my_target: {
+        files: {
+          'dist/js/perfmatters.js': ['src/js/perfmatters.js'],
+          'dist/views/js/main.js': ['src/views/js/main.js']
+        }
       }
     },
-
     jshint: {
       files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
       options: {
