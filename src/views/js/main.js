@@ -142,8 +142,9 @@ pizzaIngredients.crusts = [
   "Stuffed Crust"
 ];
 
-// Instantiate the global moving pizzas varaible that will be assign after
-// the dom has been loaded.
+// Instantiate a global variable that will contain all the pizza elements that
+// move when the user scrolls the page.  Assign to this variable after the Dom
+// has finished loading.
 var movingPizzas;
 
 // Name generator pulled from http://saturdaykid.com/usernames/generator.html
@@ -498,6 +499,8 @@ function updatePositions() {
     for (var i = 0; i < movingPizzas.length; i++) {
       var phase = Math.sin(fromTop + (i % 5));
       var amount = movingPizzas[i].basicLeft + 100 * phase + 'px';
+      // Use 'transform' rather than 'left' to avoid triggering layout and
+      // paint.
       movingPizzas[i].style.transform = 'translateX(' + amount + ')';
     }
   });
