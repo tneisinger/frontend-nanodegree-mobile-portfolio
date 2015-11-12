@@ -142,6 +142,10 @@ pizzaIngredients.crusts = [
   "Stuffed Crust"
 ];
 
+// Instantiate the global moving pizzas varaible that will be assign after
+// the dom has been loaded.
+var movingPizzas;
+
 // Name generator pulled from http://saturdaykid.com/usernames/generator.html
 // Capitalizes first letter of each word
 String.prototype.capitalize = function() {
@@ -437,7 +441,7 @@ var resizePizzas = function(size) {
         console.log("error in changePizzaSizes");
     }
 
-    var pizzaContainers = document.querySelectorAll('.randomPizzaContainer');
+    var pizzaContainers = document.getElementsByClassName('randomPizzaContainer');
     for (var i = 0; i < pizzaContainers.length; i++) {
       pizzaContainers[i].style.width = newWidth + '%';
     }
@@ -488,11 +492,15 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-  }
+  // Use requestAnimationFrame to move the pizzas
+  window.requestAnimationFrame(function() {
+    var fromTop = document.body.scrollTop / 1250;
+    for (var i = 0; i < movingPizzas.length; i++) {
+      var phase = Math.sin(fromTop + (i % 5));
+      var amount = movingPizzas[i].basicLeft + 100 * phase + 'px';
+      movingPizzas[i].style.transform = 'translateX(' + amount + ')';
+    }
+  });
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
@@ -511,7 +519,7 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 50; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
@@ -521,5 +529,10 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
   }
+
+  // Get all the moving pizzas and assign them to the
+  // movingPizzas global variable.
+  movingPizzas = document.getElementsByClassName('mover');
+
   updatePositions();
 });

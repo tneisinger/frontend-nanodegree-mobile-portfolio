@@ -44,7 +44,12 @@ module.exports = function(grunt) {
           cwd: 'src/css/',
           src: ['*.css'],
           dest: 'dist/css/'
-        }]
+        }, {
+          expand: true,
+          cwd: 'src/views/css/',
+          src: ['*.css'],
+          dest: 'dist/views/css/'
+          }]
       }
     },
     htmlmin: {
